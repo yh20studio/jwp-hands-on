@@ -15,8 +15,9 @@ public class TransactionPointcut extends StaticMethodMatcherPointcut {
     @Override
     public boolean matches(final Method method, final Class<?> targetClass) {
         try {
-            return targetClass.getMethod(method.getName(), method.getParameterTypes())
+            final boolean annotationPresent = targetClass.getMethod(method.getName(), method.getParameterTypes())
                     .isAnnotationPresent(Transactional.class);
+            return annotationPresent;
         } catch (NoSuchMethodException e) {
             return false;
         }
